@@ -1,0 +1,132 @@
+import java.util.Map;
+
+
+class Notes{
+    
+    float[] naturalNotes = {
+        261.63, // Do (1)
+        293.66, // Re (2)
+        329.63, // Mi (3)
+        349.23, // Fa (4)
+        392.00, // Sol (5)
+        440.00, // La (6)
+        493.88, // Si (7)
+        523.25, // Do superior (8)
+        587.33, // Re bajo (9)
+        659.26// Mi #
+    };
+    
+    float[] sharpNotes = {
+        277.18, // Do (1)
+        311.13, // Re (2)
+        369.99, // Fa (4)
+        415.30, // Sol (5)
+        466.16, // La (6)
+        554.37, // Do#
+        622.25, // Re#
+    };
+    HashMap<String, Double> notes = new HashMap<String, Double>();
+    notes.put("C", 32.70);
+    notes.put("C#", 34.65);
+    notes.put("D", 36.71);
+    notes.put("D#", 38.89);
+    notes.put("E", 41.20);
+    notes.put("F", 43.65);
+    notes.put("F#", 46.25);
+    notes.put("G", 49.00);
+    notes.put("G#", 51.91);
+    notes.put("A", 55.00);
+    notes.put("A#", 58.27);
+    notes.put("B", 61.74);
+    
+    notes.put("C_", 65.41);
+    notes.put("C#_", 69.30);
+    notes.put("D_", 73.42);
+    notes.put("D#_", 77.78);
+    notes.put("E_", 82.41);
+    notes.put("F_", 87.31);
+    notes.put("F#_", 92.50);
+    notes.put("G_", 98.00);
+    notes.put("G#_", 103.83);
+    notes.put("A_", 110.00);
+    notes.put("A#_", 116.54);
+    notes.put("B_", 123.47);
+    
+    notes.put("C__", 130.81);
+    notes.put("C#__", 138.59);
+    notes.put("D__", 146.83);
+    notes.put("D#__", 155.56);
+    notes.put("E__", 164.81);
+    notes.put("F__", 174.61);
+    notes.put("F#__", 185.00);
+    notes.put("G__", 196.00);
+    notes.put("G#__", 207.65);
+    notes.put("A__", 220.00);
+    notes.put("A#__", 233.08);
+    notes.put("B__", 246.94);
+    
+    notes.put("C___", 261.63);
+    notes.put("C#___", 277.18);
+    notes.put("D___", 293.66);
+    notes.put("D#___", 311.13);
+    notes.put("E___", 329.63);
+    notes.put("F___", 349.23);
+    notes.put("F#___", 369.99);
+    notes.put("G___", 392.00);
+    notes.put("G#___", 415.30);
+    notes.put("A___", 440.00);
+    notes.put("A#___", 466.16);
+    notes.put("B___", 493.88);
+    
+    notes.put("C____", 523.25);
+    notes.put("C#____", 554.37);
+    notes.put("D____", 587.33);
+    notes.put("D#____", 622.25);
+    notes.put("E____", 659.25);
+    notes.put("F____", 698.46);
+    notes.put("F#____", 739.99);
+    notes.put("G____", 783.99);
+    notes.put("G#____", 830.61);
+    notes.put("A____", 880.00);
+    notes.put("A#____", 932.33);
+    notes.put("B____", 987.77);
+    
+    notes.put("C_____", 1046.50);
+    notes.put("C#_____", 1108.73);
+    notes.put("D_____", 1174.66);
+    notes.put("D#_____", 1244.51);
+    notes.put("E_____", 1318.51);
+    notes.put("F_____", 1396.91);
+    notes.put("F#_____", 1479.98);
+    notes.put("G_____", 1567.98);
+    notes.put("G#_____", 1661.22);
+    notes.put("A_____", 1760.00);
+    notes.put("A#_____", 1864.66);
+    notes.put("B_____", 1975.53);
+    
+    notes.put("C______", 2093.00);
+    notes.put("C#______", 2217.46);
+    notes.put("D______", 2349.32);
+    notes.put("D#______", 2489.02);
+    notes.put("E______", 2637.02);
+    notes.put("F______", 2793.83);
+    notes.put("F#______", 2959.96);
+    notes.put("G______", 3135.96);
+    notes.put("G#______", 3322.44);
+    notes.put("A______", 3520.00);
+    notes.put("A#______", 3729.31);
+    notes.put("B______", 3951.07);
+    
+    notes.put("C_______", 4186.01);
+    notes.put("C#_______", 4434.92);
+    notes.put("D_______", 4698.64);
+    notes.put("D#_______", 4978.03);
+    notes.put("E_______", 5274.04);
+    notes.put("F_______", 5587.65);
+    notes.put("F#_______", 5919.91);
+    notes.put("G_______", 6271.93);
+    notes.put("G#_______", 6644.88);
+    notes.put("A_______", 7040.00);
+    notes.put("A#_______", 7458.62);
+    notes.put("B_______", 7902.13);
+}
