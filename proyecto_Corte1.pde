@@ -5,24 +5,26 @@ SquareWave square1, square2; // Canales de onda cuadrada
 TriangleWave triangle;       // Canal de onda triangular
 Noise noise;                 // Canal de ruido
 int dutyCycleIndex = 0;       // Ciclo de trabajo actual para las ondas cuadradas
+int dutyCycleIndex2 = 0;       // Ciclo de trabajo actual para las ondas cuadradas
 float[] dutyCycles = {0.125, 0.25, 0.5, 0.75};  // Opciones de ciclo de trabajo
 boolean sharp = false;       // Control para diferenciar entre notas naturales y negras
 int currentGenerator = 0;    // Índice del generador actual (0: square1, 1: square2, 2: triangle, 3: noise)
-ArrayList<Mandala> mandalas = new ArrayList<>(); // Lista de mandalas
+//ArrayList<Mandala> mandalas = new ArrayList<>(); // Lista de mandalas
 Notes notes;
 int scale = 2;
 int xTam = 256*scale;
 int yTam = 240*scale;
 int sprite = 8*scale;
 
+boolean rectEvent = false;
+
 void setup() {
   size(256, 240);
   windowResize(xTam, yTam);
   textAlign(CENTER, CENTER);
+  frameRate(30);
 
   notes = new Notes();
-
-  // Inicializar generadores de sonido
   square1 = new SquareWave(this); 
   square2 = new SquareWave(this);
   triangle = new TriangleWave(this);
@@ -32,18 +34,38 @@ void setup() {
 void draw() {
   background(30);
   
-  // Dibujar todos los mandalas
-  for (Mandala mandala : mandalas) {
-    mandala.display();
-  }
-  //test();
-
+  // // Dibujar todos los mandalas
+  // for (Mandala mandala : mandalas) {
+  //   mandala.display();
+  // }
+  // //test();
   
+  drawRect(frameCount);
+
+
   fill(255);
-  text("Teclas blancas: q, w, e, r, t, y, u, i, o, p", width / 2, height - 80);
-  text("Teclas negras: 2, 3, 5, 6, 7, 9, 0", width / 2, height - 60);
-  text("Espacio: Cambiar Duty Cycle | Tab: Cambiar Generador", width / 2, height - 40);
-  text("Generador actual: " + getCurrentGeneratorName(), width / 2, height - 20);
+  text("Teclas blancas: q, w, e, r, t, y, u, i, o, p", width / 2, height - 100);
+  text("Teclas negras: 2, 3, 5, 6, 7, 9, 0", width / 2, height - 80);
+  text("Espacio: Cambiar Duty Cycle | Tab: Cambiar Generador", width / 2, height - 60);
+  text("Generador actual: " + getCurrentGeneratorName(), width / 2, height - 40);
+  if (currentGenerator == 0)
+  text("ancho del ciclo:  " + dutyCycles[dutyCycleIndex], width / 2, height - 20);
+  else if (currentGenerator == 1)
+  text("ancho del ciclo:  " + dutyCycles[dutyCycleIndex2], width / 2, height - 20);
+}
+
+
+void drawRect(int iterator){
+  if(rectEvent)
+  {
+    int looper = iterator % 30;
+    strokeWeight(1);
+    stroke(255, 0, 0);
+    noFill();
+    rect(looper*sprite, looper*sprite, sprite, sprite);
+    println(looper);
+  }
+
 }
 
 // Obtener el nombre del generador actual
@@ -70,13 +92,18 @@ void keyPressed() {
   // Teclas blancas
   if (key >= 'q' || key <= 'p') {
     noteIndex = "qwertyuiop".indexOf(key); // Mapear q-p a índices 0-9
+    float freq = 0;
     if (noteIndex != -1) {
-      float freq = notes.naturalNotes[noteIndex];
+      if(currentGenerator == 1){
+         freq = notes.naturalNotes2[noteIndex];
+      }else{
+         freq = notes.naturalNotes1[noteIndex];}
       playSound(freq);
 
+      rectEvent = true;
 
       //mandalas.add(new Mandala(freq, currentGenerator, false));
-      mandalas.add(new Mandala(width / 2, height / 2, freq, currentGenerator, false));
+      //mandalas.add(new Mandala(width / 2, height / 2, freq, currentGenerator, false));
     }
   }
   
@@ -84,20 +111,24 @@ void keyPressed() {
   if (key >= '2' && key <= '9' || key == '0') {
     noteIndex = "2356790".indexOf(key); // Mapear 2,3,5,6,7,9,0 a índices 0-6
     if (noteIndex != -1) {
-      float freq = notes.sharpNotes[noteIndex];
+      float freq = notes.sharpNotes1[noteIndex];
       playSound(freq);
       //mandalas.add(new Mandala(freq, currentGenerator, true));
 
-      mandalas.add(new Mandala(width / 2, height / 2, freq, currentGenerator, true));
+      //mandalas.add(new Mandala(width / 2, height / 2, freq, currentGenerator, true));
     }
   }
 
   // Cambiar Duty Cycle
-  else if (key == ' ') {
+  else if (key == ' ' && currentGenerator == 0) {
     dutyCycleIndex = (dutyCycleIndex + 1) % dutyCycles.length;
     square1.setDutyCycle(dutyCycles[dutyCycleIndex]);
-    square2.setDutyCycle(dutyCycles[dutyCycleIndex]);
   }
+  else if (key == ' ' && currentGenerator == 1) {
+    dutyCycleIndex2 = (dutyCycleIndex2 + 1) % dutyCycles.length;
+    square2.setDutyCycle(dutyCycles[dutyCycleIndex2]);
+  }
+
 }
 
 // Manejar la liberación de teclas para detener el sonido
@@ -140,20 +171,5 @@ void stopSound() {
     case 3: 
       noise.stop();
       break;
-  }
-}
-
-
-int framesPorCapa = 15;
-void test() {
-  int capa = frameCount / framesPorCapa;
-  translate(width / 2, height / 2);
-  fill(255,0,0);
-  rectMode(CENTER);
-  for (int i = -capa; i <= capa; i++) {
-    for (int j = -capa; j <= capa; j++) {
-        rect(0 + i*sprite - sprite/2, 0 + j*sprite - sprite/2,sprite, sprite);
-        
-    }
   }
 }

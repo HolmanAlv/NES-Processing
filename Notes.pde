@@ -1,6 +1,6 @@
 class Notes{
     
-    float[] naturalNotes = {
+    float[] naturalNotes1 = {
         261.63, // Do (1)
         293.66, // Re (2)
         329.63, // Mi (3)
@@ -13,7 +13,7 @@ class Notes{
         659.26// Mi #
     };
     
-    float[] sharpNotes = {
+    float[] sharpNotes1 = {
         277.18, // Do (1)
         311.13, // Re (2)
         369.99, // Fa (4)
@@ -21,6 +21,30 @@ class Notes{
         466.16, // La (6)
         554.37, // Do#
         622.25, // Re#
+    };
+
+    float[] naturalNotes2 = {
+        523.25, // Do (1)
+        587.33, // Re (2)
+        659.25, // Mi (3)
+        698.46, // Fa (4)
+        783.99, // Sol (5)
+        880.00, // La (6)
+        987.77, // Si (7)
+        1046.50, // Do 
+        1174.66, // Re
+        1318.51// Mi #    
+
+    };
+    
+    float[] sharpNotes2 = {
+        554.37, // Do (1)
+        622.25, // Re (2)
+        739.99, // Fa (4)
+        830.61, // Sol (5)
+        932.33, // La (6)
+        1108.73, // Do#
+        1244.51, // Re#
     };
     
    // FloatDict notes = new FloatDict(("C", 32.7));
