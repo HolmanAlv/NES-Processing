@@ -54,7 +54,7 @@ void draw() {
   text("ancho del ciclo:  " + dutyCycles[dutyCycleIndex2], width / 2, height - 20);
 }
 
-
+int pos = 0;
 void drawRect(int iterator){
   if(rectEvent)
   {
@@ -62,8 +62,9 @@ void drawRect(int iterator){
     strokeWeight(1);
     stroke(255, 0, 0);
     noFill();
-    rect(looper*sprite, looper*sprite, sprite, sprite);
+    rect(0, pos, sprite, sprite);
     println(looper);
+    pos++;
   }
 
 }
