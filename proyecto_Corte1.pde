@@ -62,8 +62,7 @@ void drawRect(int iterator){
     strokeWeight(1);
     stroke(255, 0, 0);
     noFill();
-    rect(0, pos, sprite, sprite);
-    println(looper);
+    rect(pos, 0, sprite, sprite);
     pos++;
   }
 
@@ -97,8 +96,12 @@ void keyPressed() {
     if (noteIndex != -1) {
       if(currentGenerator == 1){
          freq = notes.naturalNotes2[noteIndex];
-      }else{
-         freq = notes.naturalNotes1[noteIndex];}
+      }else if(currentGenerator == 0){
+         freq = notes.naturalNotes1[noteIndex];
+      }
+      if (currentGenerator == 2){
+        freq = notes.bassNotes[noteIndex];
+      }
       playSound(freq);
 
       rectEvent = true;
@@ -110,9 +113,16 @@ void keyPressed() {
   
   // Teclas negras
   if (key >= '2' && key <= '9' || key == '0') {
+    float freq = 0;
     noteIndex = "2356790".indexOf(key); // Mapear 2,3,5,6,7,9,0 a índices 0-6
     if (noteIndex != -1) {
-      float freq = notes.sharpNotes1[noteIndex];
+      if(currentGenerator == 1){
+         freq = notes.sharpNotes2[noteIndex];
+      }else if(currentGenerator == 0){
+         freq = notes.sharpNotes1[noteIndex];
+      }else if(currentGenerator == 2){
+        freq = notes.sharpBassNotes[noteIndex];
+      }
       playSound(freq);
       //mandalas.add(new Mandala(freq, currentGenerator, true));
 
@@ -152,7 +162,7 @@ void playSound(float freq) {
       triangle.start(freq);
       break;
     case 3: 
-      noise.play(0.5); // Volumen fijo para el ruido
+      noise.play(0.85); // Volumen fijo para el ruido
       break;
   }
 }
